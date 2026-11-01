@@ -1,0 +1,105 @@
+# Rule-based weather and air quality advisory configuration
+# Severity levels: info, moderate, warning, danger
+# Missing variables are strictly skipped with an explanatory note; never guessed or fabricated.
+
+rules:
+  - id: "umbrella_rain"
+    title: "Carry an Umbrella"
+    severity: "moderate"
+    category: "precipitation"
+    description: "Suggests carrying an umbrella when rain is forecasted or precipitation probability is elevated."
+    required_variables: ["precipitation_probability_max", "precipitation", "precipitation_sum", "weather_code"]
+    conditions:
+      any_of:
+        - field: "precipitation_probability_max"
+          operator: ">="
+          threshold: 40.0
+          units: "%"
+        - field: "precipitation"
+          operator: ">="
+          threshold: 1.0
+          units: "mm"
+        - field: "precipitation_sum"
+          operator: ">="
+          threshold: 1.0
+          units: "mm"
+        - field: "weather_code"
+          operator: "in"
+          values: [51, 53, 55, 61, 63, 65, 80, 81, 82, 95, 96, 99]
+    template: "Precipitation risk detected: {trigger_field} is {trigger_value}. Carrying an umbrella or waterproof outerwear is advised."
+
+  - id: "heat_caution"
+    title: "Extreme Heat Caution"
+    severity: "warning"
+    category: "temperature"
+    description: "Alerts when temperature or apparent temperature exceeds heat stress thresholds."
+    required_variables: ["apparent_temperature", "apparent_temperature_max", "temperature"]
+    conditions:
+      any_of:
+        - field: "apparent_temperature"
+          operator: ">="
+          threshold: 40.0
+          units: "°C"
+        - field: "apparent_temperature_max"
+          operator: ">="
+          threshold: 40.0
+          units: "°C"
+        - field: "temperature"
+          operator: ">="
+          threshold: 40.0
+          units: "°C"
+    template: "Heat threshold exceeded: {trigger_field} reaches {trigger_value}°C. Stay hydrated and minimize direct sun exposure during peak afternoon hours."
+
+  - id: "strong_wind"
+    title: "High Wind Advisory"
+    severity: "moderate"
+    category: "wind"
+    description: "Advises caution when sustained wind speeds or wind gusts are elevated."
+    required_variables: ["wind_speed", "wind_speed_max"]
+    conditions:
+      any_of:
+        - field: "wind_speed"
+          operator: ">="
+          threshold: 35.0
+          units: "km/h"
+        - field: "wind_speed_max"
+          operator: ">="
+          threshold: 35.0
+          units: "km/h"
+    template: "Elevated winds: {trigger_field} reaches {trigger_value} km/h. Secure loose outdoor objects and exercise caution."
+
+  - id: "poor_air_quality"
+    title: "Unhealthy Air Quality Advisory"
+    severity: "warning"
+    category: "air_quality"
+    description: "Alerts when PM2.5 or US AQI reaches levels unhealthy for sensitive groups or general public."
+    required_variables: ["aqi", "pm2_5"]
+    conditions:
+      any_of:
+        - field: "aqi"
+          operator: ">="
+          threshold: 101.0
+          units: "AQI"
+        - field: "pm2_5"
+          operator: ">="
+          threshold: 35.5
+          units: "µg/m³"
+    template: "Air quality concern: {trigger_field} is {trigger_value} (threshold exceeded). Sensitive individuals should limit prolonged outdoor exertion."
+
+  - id: "high_uv"
+    title: "High UV Index Warning"
+    severity: "info"
+    category: "uv"
+    description: "Recommends sun protection when UV radiation reaches elevated levels."
+    required_variables: ["uv_index", "uv_index_max"]
+    conditions:
+      any_of:
+        - field: "uv_index"
+          operator: ">="
+          threshold: 6.0
+          units: "index"
+        - field: "uv_index_max"
+          operator: ">="
+          threshold: 6.0
+          units: "index"
+    template: "UV index is {trigger_value} (threshold >= 6.0). Sunscreen (SPF 30+) and sunglasses are recommended."
