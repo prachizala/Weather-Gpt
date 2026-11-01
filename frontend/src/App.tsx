@@ -8,6 +8,7 @@ import { WeatherCharts } from './components/WeatherCharts';
 import { AirQualityCard } from './components/AirQualityCard';
 import { LifestyleIntelligenceCard } from './components/LifestyleIntelligenceCard';
 import { EventWeatherShieldCard } from './components/EventWeatherShieldCard';
+import { VoiceBriefingCard } from './components/VoiceBriefingCard';
 import { ChatPanel } from './components/ChatPanel';
 import { AdvisoriesBanner } from './components/AdvisoriesBanner';
 import { HistoricalComparisonCard } from './components/HistoricalComparisonCard';
@@ -270,6 +271,15 @@ export const App: React.FC = () => {
                 weather={weather}
                 units={units}
                 onToggleUnits={toggleUnits}
+                isLoading={isLoading}
+              />
+
+              <VoiceBriefingCard
+                location={selectedLocation}
+                weather={weather}
+                forecast={forecast}
+                airQuality={airQuality}
+                units={units}
                 isLoading={isLoading}
               />
 
