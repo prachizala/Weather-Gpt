@@ -13,6 +13,7 @@ import { WeatherAnomalyCard } from './components/WeatherAnomalyCard';
 import { WindStreamlineCard } from './components/WindStreamlineCard';
 import { BiometeorologyCard } from './components/BiometeorologyCard';
 import { PrecipitationNowcastCard } from './components/PrecipitationNowcastCard';
+import { EnergyWeatherCard } from './components/EnergyWeatherCard';
 import { ChatPanel } from './components/ChatPanel';
 import { AdvisoriesBanner } from './components/AdvisoriesBanner';
 import { HistoricalComparisonCard } from './components/HistoricalComparisonCard';
@@ -335,6 +336,17 @@ export const App: React.FC = () => {
                 weather={weather}
                 forecast={forecast}
                 cityName={selectedLocation.name}
+                units={units}
+                isLoading={isLoading}
+                onAskAI={(prompt) => {
+                  window.dispatchEvent(new CustomEvent('weathergpt:ask-ai', { detail: { prompt } }));
+                }}
+              />
+
+              <EnergyWeatherCard
+                location={selectedLocation}
+                weather={weather}
+                airQuality={airQuality}
                 units={units}
                 isLoading={isLoading}
                 onAskAI={(prompt) => {
