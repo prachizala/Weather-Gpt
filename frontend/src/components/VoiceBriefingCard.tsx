@@ -31,11 +31,25 @@ export const VoiceBriefingCard: React.FC<VoiceBriefingCardProps> = ({
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [language, setLanguage] = useState<'en' | 'hi' | 'gu'>('en');
   const [isSupported, setIsSupported] = useState<boolean>(true);
+  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
   const synthRef = useRef<SpeechSynthesis | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       synthRef.current = window.speechSynthesis;
+
+      const updateVoices = () => {
+        if (!synthRef.current) return;
+        const v = synthRef.current.getVoices();
+        if (v && v.length > 0) {
+          setAvailableVoices(v);
+        }
+      };
+
+      updateVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = updateVoices;
+      }
     } else {
       setIsSupported(false);
     }
@@ -64,8 +78,11 @@ export const VoiceBriefingCard: React.FC<VoiceBriefingCardProps> = ({
   const timeGreetingHi = hour < 12 ? 'सुप्रभात' : hour < 17 ? 'शुभ दोपहर' : 'शुभ संध्या';
   const timeGreetingGu = hour < 12 ? 'શુભ સવાર' : hour < 17 ? 'શુભ બપોર' : 'શુભ સાંજ';
 
-  // Dynamic Radio Brief Scripts
-  const scripts = {
+  const phoneticGreetingHi = hour < 12 ? 'Namaste, Suprabhat' : hour < 17 ? 'Namaste, Shubh Dopahar' : 'Namaste, Shubh Sandhya';
+  const phoneticGreetingGu = hour < 12 ? 'Namaste, Shubh Savaar' : hour < 17 ? 'Namaste, Shubh Bapor' : 'Namaste, Shubh Saanj';
+
+  // Dynamic Radio Brief Scripts (Authentic Display Scripts)
+  const displayScripts = {
     en: `${timeGreetingEn} ${cityName}! Here is your 30-second meteorological briefing. Currently it is ${temp} ${tempSymbol}, feeling like ${feelsLike}. Today's high will reach ${maxTemp} with an overnight low of ${minTemp}. ${
       rainProb >= 40
         ? `Keep an umbrella handy, as there is a ${rainProb} percent chance of rain.`
@@ -85,7 +102,22 @@ export const VoiceBriefingCard: React.FC<VoiceBriefingCardProps> = ({
     } હવા ગુણવત્તા સૂચકાંક ${aqi} છે. આપનો દિવસ શુભ રહે!`,
   };
 
-  const currentScript = scripts[language];
+  // Phonetic Voice Scripts (for speech engines without native Hindi/Gujarati fonts/phonemes)
+  const phoneticVoiceScripts = {
+    hi: `${phoneticGreetingHi} ${cityName}! Yeh hai aapka tees second ka mausam bulletin. Vartamaan taapmaan ${temp} degree Celsius hai, jo mehsus ${feelsLike} degree jaisa ho raha hai. Aaj ka adhiktam taapmaan ${maxTemp} degree aur nyunatam ${minTemp} degree rehne ki sambhavna hai. ${
+      rainProb >= 40
+        ? `Aaj chhata saath rakhein, kyunki baarish ki sambhavna ${rainProb} percent hai.`
+        : 'Aaj mausam shushk rahega aur baarish ki koi sambhavna nahi hai.'
+    } Vayu gunvatta suchkaank yaani AQI ${aqi} hai. Aapka din mangalmay ho!`,
+
+    gu: `${phoneticGreetingGu} ${cityName}! Aa chhe tamaru tees second nu havaamaan bulletin. Haalma taapmaan ${temp} degree chhe, ane mehsus ${feelsLike} degree jaisa laagi rahyu chhe. Aajnu mahattam taapmaan ${maxTemp} degree ane laghutam ${minTemp} degree rehvaani shakyata chhe. ${
+      rainProb >= 40
+        ? `Aaje varsaad ni shakyata ${rainProb} taka chhe, tethi chhatri saathe raakhvi.`
+        : 'Aaje havaamaan saamaanya ane suku raheshe.'
+    } Hava gunvatta index ${aqi} chhe. Aapno divas shubh rahe!`,
+  };
+
+  const currentDisplayScript = displayScripts[language];
 
   const handleTogglePlay = () => {
     if (!synthRef.current || !isSupported) return;
@@ -97,30 +129,70 @@ export const VoiceBriefingCard: React.FC<VoiceBriefingCardProps> = ({
     }
 
     synthRef.current.cancel(); // Stop any pending speech
-    const utterance = new SpeechSynthesisUtterance(currentScript);
 
-    // Pick appropriate voice
-    const voices = synthRef.current.getVoices();
+    // Ensure voices are fetched
+    const voices = synthRef.current.getVoices().length > 0
+      ? synthRef.current.getVoices()
+      : availableVoices;
+
+    let textToSpeak = currentDisplayScript;
+    let selectedVoice: SpeechSynthesisVoice | undefined;
+    let langCode = 'en-US';
+    let speechRate = 0.95;
+
     if (language === 'hi') {
-      const hiVoice = voices.find((v) => v.lang.includes('hi') || v.lang.includes('IN'));
-      if (hiVoice) utterance.voice = hiVoice;
-      utterance.lang = 'hi-IN';
-      utterance.rate = 0.95;
+      // 1. Look for true Hindi voice
+      selectedVoice = voices.find((v) => {
+        const l = v.lang.toLowerCase();
+        return l.startsWith('hi') || v.name.toLowerCase().includes('hindi');
+      });
+
+      if (selectedVoice) {
+        textToSpeak = displayScripts.hi;
+        langCode = selectedVoice.lang || 'hi-IN';
+      } else {
+        // Fallback to Indian English voice with natural phonetic Hinglish
+        textToSpeak = phoneticVoiceScripts.hi;
+        selectedVoice = voices.find(
+          (v) => v.lang.toLowerCase().includes('en-in') || v.name.toLowerCase().includes('india')
+        ) || voices.find((v) => v.lang.toLowerCase().startsWith('en'));
+        langCode = 'en-IN';
+        speechRate = 0.9;
+      }
     } else if (language === 'gu') {
-      const guVoice = voices.find((v) => v.lang.includes('gu') || v.lang.includes('IN'));
-      if (guVoice) utterance.voice = guVoice;
-      utterance.lang = 'gu-IN';
-      utterance.rate = 0.95;
+      // 1. Look for true Gujarati voice
+      selectedVoice = voices.find((v) => {
+        const l = v.lang.toLowerCase();
+        return l.startsWith('gu') || v.name.toLowerCase().includes('gujarati');
+      });
+
+      if (selectedVoice) {
+        textToSpeak = displayScripts.gu;
+        langCode = selectedVoice.lang || 'gu-IN';
+      } else {
+        // Fallback to Indian voice with natural Gujlish phonetics
+        textToSpeak = phoneticVoiceScripts.gu;
+        selectedVoice = voices.find(
+          (v) => v.lang.toLowerCase().includes('en-in') || v.name.toLowerCase().includes('india')
+        ) || voices.find((v) => v.lang.toLowerCase().startsWith('en'));
+        langCode = 'en-IN';
+        speechRate = 0.9;
+      }
     } else {
-      const enVoice = voices.find(
-        (v) => v.lang.includes('en-IN') || (v.lang.includes('en') && v.name.includes('Natural'))
-      ) || voices.find((v) => v.lang.includes('en'));
-      if (enVoice) utterance.voice = enVoice;
-      utterance.lang = 'en-US';
-      utterance.rate = 1.0;
+      selectedVoice = voices.find(
+        (v) => v.lang.toLowerCase().includes('en-in') || (v.lang.toLowerCase().startsWith('en') && v.name.includes('Natural'))
+      ) || voices.find((v) => v.lang.toLowerCase().startsWith('en'));
+      langCode = selectedVoice?.lang || 'en-US';
+      speechRate = 1.0;
     }
 
-    utterance.pitch = 1.05;
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+    }
+    utterance.lang = langCode;
+    utterance.rate = speechRate;
+    utterance.pitch = 1.02;
 
     utterance.onend = () => setIsPlaying(false);
     utterance.onerror = () => setIsPlaying(false);
@@ -313,7 +385,7 @@ export const VoiceBriefingCard: React.FC<VoiceBriefingCardProps> = ({
             WebkitBoxOrient: 'vertical',
           }}
         >
-          {isPlaying ? `🎙️ "${currentScript}"` : `Click "Listen Now" to hear your 30s personalized meteorological morning brief.`}
+          {isPlaying ? `🎙️ "${currentDisplayScript}"` : `Click "Listen Now" to hear your 30s personalized meteorological morning brief.`}
         </p>
       </div>
 
