@@ -81,6 +81,30 @@ def create_app() -> FastAPI:
 
     app.include_router(api_router, prefix="/api")
 
+    # Serve static frontend SPA build in production if available
+    import os
+    from fastapi.staticfiles import StaticFiles
+    from fastapi.responses import FileResponse
+
+    frontend_dist = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "frontend", "dist")
+    if os.path.exists(frontend_dist):
+        assets_dir = os.path.join(frontend_dist, "assets")
+        if os.path.exists(assets_dir):
+            app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+        @app.get("/{full_path:path}")
+        async def serve_spa(full_path: str):
+            # Do not intercept API requests
+            if full_path.startswith("api"):
+                return JSONResponse(status_code=404, content={"error": "Not Found"})
+            file_path = os.path.join(frontend_dist, full_path)
+            if full_path and os.path.exists(file_path) and os.path.isfile(file_path):
+                return FileResponse(file_path)
+            index_path = os.path.join(frontend_dist, "index.html")
+            if os.path.exists(index_path):
+                return FileResponse(index_path)
+            return JSONResponse(status_code=404, content={"error": "Frontend build not found"})
+
     # Consistent Error Handlers returning ErrorResponse
     @app.exception_handler(WeatherGPTException)
     async def weathergpt_exception_handler(request: Request, exc: WeatherGPTException) -> JSONResponse:
