@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1220"/>
+      <stop offset="100%" stop-color="#111B2E"/>
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base App Background with subtle rounded corners -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  <rect x="4" y="4" width="504" height="504" rx="108" fill="none" stroke="#1E2A44" stroke-width="8"/>
+
+  <!-- Ambient Glow -->
+  <circle cx="280" cy="240" r="160" fill="url(#glowGrad)"/>
+
+  <!-- Sun Rays & Core -->
+  <circle cx="330" cy="190" r="72" fill="url(#sunGrad)"/>
+
+  <!-- Modern Dynamic Cloud -->
+  <path d="M 170 340 
+           L 360 340 
+           A 55 55 0 0 0 360 230 
+           A 35 35 0 0 0 340 215 
+           A 75 75 0 0 0 200 240 
+           A 55 55 0 0 0 170 340 Z" 
+        fill="url(#cloudGrad)"/>
+
+  <!-- High-Tech Lightning / Radar Bolt Accent -->
+  <path d="M 270 320 L 245 375 L 280 375 L 250 435 L 305 365 L 270 365 Z" 
+        fill="#FBBF24"/>
+
+  <!-- WeatherGPT Wordmark Badge -->
+  <text x="256" y="475" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="900" fill="#F8FAFC" letter-spacing="1">WEATHER<tspan fill="#38BDF8">GPT</tspan></text>
+</svg>

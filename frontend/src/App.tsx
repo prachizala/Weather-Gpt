@@ -14,6 +14,7 @@ import { WindStreamlineCard } from './components/WindStreamlineCard';
 import { BiometeorologyCard } from './components/BiometeorologyCard';
 import { PrecipitationNowcastCard } from './components/PrecipitationNowcastCard';
 import { EnergyWeatherCard } from './components/EnergyWeatherCard';
+import { PwaInstallBanner } from './components/PwaInstallBanner';
 import { ChatPanel } from './components/ChatPanel';
 import { AdvisoriesBanner } from './components/AdvisoriesBanner';
 import { HistoricalComparisonCard } from './components/HistoricalComparisonCard';
@@ -176,8 +177,9 @@ export const App: React.FC = () => {
               />
             </div>
 
-            {/* Right section: Units toggle */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {/* Right section: PWA Install & Units toggle */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <PwaInstallBanner />
               <button
                 onClick={toggleUnits}
                 aria-label={`Switch to ${units === 'celsius' ? 'Fahrenheit' : 'Celsius'}`}

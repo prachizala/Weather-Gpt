@@ -1,0 +1,38 @@
+{
+  "name": "WeatherGPT - Grounded Meteorological Intelligence",
+  "short_name": "WeatherGPT",
+  "description": "Next-Generation AI Meteorological Dashboard with Real-Time Grounded Weather Intelligence & Decision Radars",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B1220",
+  "theme_color": "#0B1220",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/pwa-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["weather", "utilities", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Live Weather",
+      "url": "/",
+      "icons": [{ "src": "/pwa-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
