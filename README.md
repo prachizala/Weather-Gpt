@@ -1,145 +1,219 @@
-# WeatherGPT
+<div align="center">
 
-WeatherGPT is an agentic AI assistant engineered for meteorological intelligence, weather synthesis, historical reanalysis, air quality tracking, and forecasting.
+# 🌤️ WeatherGPT
+### Next-Generation Agentic AI Meteorological Intelligence & Decision Radars
+
+[![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![React Vite](https://img.shields.io/badge/React_Vite-18+-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![PWA Ready](https://img.shields.io/badge/PWA-Installable-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
+[![Docker](https://img.shields.io/badge/Docker-Multi--Stage-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
+[![OpenRouter](https://img.shields.io/badge/OpenRouter-Gemini_2.5-6366F1?style=for-the-badge&logo=openai&logoColor=white)](https://openrouter.ai)
+[![License: CC BY 4.0](https://img.shields.io/badge/Data_License-CC_BY_4.0-lightgrey.svg?style=for-the-badge)](https://creativecommons.org/licenses/by/4.0/)
+
+<p align="center">
+  <strong>WeatherGPT</strong> is an advanced full-stack AI meteorological application that bridges scientific atmospheric physics with daily human decisions. Combining factual retrieval-augmented generation (RAG), strict anti-hallucination number verification, real-time Doppler precipitation sweeps, clinical biometeorology, and home energy modeling.
+</p>
+
+[✨ Live Features](#-key-features--market-differentiators) • [🚀 Quickstart](#-quickstart) • [🐳 Docker & Deployment](#-docker--cloud-deployment) • [📱 PWA Setup](#-progressive-web-app-pwa) • [🧪 Test Suite](#-automated-e2e-testing)
 
 ---
 
-## Repository Layout
+</div>
+
+## 📌 Repository Description / Tagline
+> **"Agentic AI Meteorological Intelligence Dashboard with Grounded Conversational RAG, Real-Time Micro-Climate Radars, Clinical Biometeorology, Solar/AC Energy Yield, and PWA Mobile Support."**
+
+---
+
+## 🌟 Key Features & Market Differentiators
+
+Unlike traditional weather apps (Apple Weather, AccuWeather, Windy) that simply display static temperature numbers, **WeatherGPT** translates complex atmospheric data into actionable life intelligence:
+
+### 1. 👔 Daily Lifestyle & Activity Intelligence (`LifestyleIntelligenceCard`)
+* **Outfit & Layering Engine**: Analyzes wind chill, solar irradiance, and diurnal temperature spreads to recommend clothing layers.
+* **Cardio & Running Window**: Finds the exact sweet-spot hours with optimal temperature, low humidity, and acceptable AQI.
+* **Laundry & Drying Velocity Index**: Computes natural textile drying duration based on vapor pressure deficit (VPD) and wind.
+* **Hydration & Heat Stress Shield**: Calculates sweat rate index and mineral water intake requirements.
+
+### 2. 🛡️ Event & Weekend Trip Weather Shield (`EventWeatherShieldCard`)
+* 7-day multi-slot simulation (Morning, Afternoon, Evening, Night) for outdoor activities:
+  - 🏏 **Cricket & Outdoor Sports** (Rain stoppage & pitch sogginess risk)
+  - 🚗 **Highway Road Trips** (Fog, wet-braking friction, and crosswind hazard)
+  - ⛺ **Camping & Trekking** (Dew point condensation and overnight minimums)
+  - 💍 **Weddings & Open-Air Events** (Disruption risk score 0–100% with contingency verdict)
+
+### 3. 🎙️ 30-Second Morning Audio Bulletin (`VoiceBriefingCard`)
+* Radio AI host bulletin in **English (EN)**, **Hindi (HI)**, and **Gujarati (GU)**.
+* **Smart Dual-Layer Voice Engine**: Uses native Indic TTS voices when present; automatically falls back to Indian English voices (`Microsoft Heera/Ravi`) paired with natural phonetic transliteration to ensure zero skipped words or distorted phonemes.
+* Animated audio soundwave visualizer and live synced bilingual subtitles.
+
+### 4. 🔬 Meteorological Anomaly Storyteller (`WeatherAnomalyCard`)
+* Automatically detects atmospheric anomalies:
+  - Temperature Inversion Layers (valley/urban smog traps).
+  - Post-monsoon convective cloud surges.
+  - Radiational cooling with extreme day/night diurnal spreads.
+* Provides scientific physical mechanisms behind why the weather is behaving unusually.
+
+### 5. 🧭 Wind Vector Streamline Radar (`WindStreamlineCard`)
+* High-performance **60 FPS HTML5 Canvas particle streamline vectors** reacting to real-time wind speed and directional azimuth.
+* Integrated **Beaufort Aerodynamic Force Scale** (Light / Gentle / Moderate / Gale).
+* Live magnetic compass needle and adjustable streamline density (`normal`, `dense`, `vortex`).
+
+### 6. 🏥 Clinical Biometeorology & Health Radar (`BiometeorologyCard`)
+* 🧠 **Migraine & Barometric Headache Strain**: Calculates barometric pressure delta from 1013.25 hPa standard sea-level to predict vascular headaches.
+* 🫁 **Asthma & Bronchial Load**: Correlates fine PM2.5, NO2, and humidity extremes.
+* ☀️ **UV & Vitamin D Window**: Safe non-burning sun exposure countdown for healthy Vitamin D synthesis.
+* 🌿 **Sinus & Dust Dispersion Index**: Tracks ground particulate suspension from dry winds.
+
+### 7. 📡 Minutely Precipitation & Doppler PPI Radar (`PrecipitationNowcastCard`)
+* Minute-by-minute timeline for the next 60 minutes (`0m`, `+10m`, `+20m`, `+30m`, `+40m`, `+50m`, `+60m`).
+* Synthetic 360° Plan Position Indicator (PPI) circular Doppler radar sweep with interactive 15 km / 30 km / 60 km radius ranges.
+* Smart commute advice (Safe travel window before incoming rain).
+
+### 8. ⚡ Home AC Thermal Load & Solar PV Yield (`EnergyWeatherCard`)
+* **AC Power Bill Saver**: Ambient thermal load calculator with recommended thermostat setpoint (e.g. 25°C) delivering ~24% electrical savings.
+* **Rooftop Solar PV Efficiency**: Direct vs diffuse sunlight yield accounting for aerosol cloud cover and PM particulate scattering.
+* **Parked Vehicle Cabin Oven Alert**: Predicts interior car temperature spike (up to 58°C in 20 mins) for child and pet safety.
+
+### 9. 📱 Progressive Web App (PWA) & Offline Shell
+* Standalone mobile installation on Android and iOS ("Add to Home Screen").
+* High-resolution maskable icons (192×192 & 512×512) and Web App Manifest (`manifest.webmanifest`).
+* Service Worker (`sw.js`) app shell pre-caching for instant sub-second opening even in offline tunnels.
+
+### 10. 📸 9:16 Social Weather Story Generator (`WeatherStoryShareModal`)
+* One-click generation of ultra-crisp 1080×1920 Instagram Story and WhatsApp status graphic cards.
+* Client-side HTML5 Canvas PNG rendering with zero external library dependencies.
+* Native OS mobile Web Share API integration.
+
+---
+
+## 🏗️ Architecture & Grounded RAG Pipeline
 
 ```text
-├── frontend/               # User interface client (Phase 6+)
-├── backend/
-│   └── app/
-│       ├── api/            # FastAPI endpoints, route aggregation & health check
-│       │   ├── health.py       # GET /api/health
-│       │   ├── locations.py    # GET /api/locations/search
-│       │   ├── weather.py      # GET /api/weather/{current, forecast, history}
-│       │   ├── air_quality.py  # GET /api/air-quality
-│       │   └── chat.py         # POST /api/chat, POST/DELETE /api/chat/session/clear
-│       ├── services/       # Provider abstractions, normalizers & orchestration
-│       │   ├── providers.py        # WeatherProvider & LLMProvider interfaces
-│       │   ├── open_meteo.py       # Asynchronous Open-Meteo client with caching & retries
-│       │   ├── normalizers.py      # Decoupled raw JSON -> Pydantic normalizers
-│       │   ├── tools.py            # Strict JSON tool declarations & tool executor
-│       │   ├── llm_provider.py     # OpenRouter & Mock LLM adapters with OpenAI-compatible tool calling
-│       │   ├── number_verifier.py  # Anti-hallucination number verification & fallback
-│       │   ├── chat_orchestrator.py# Grounded conversation orchestrator
-│       │   ├── session_store.py    # Bounded 6-turn dialogue context & location persistence
-│       │   └── india_alerts.py     # India Meteorological Department (IMD) notice
-│       ├── rag/            # Retrieval-Augmented Generation pipeline (Phase 4+)
-│       ├── agents/         # Multi-agent coordination (Phase 5+)
-│       ├── schemas/        # Pydantic data models & validation
-│       ├── utils/          # In-memory TTL cache, date resolver & utilities
-│       │   ├── cache.py            # Thread-safe InMemoryTTLCache behind Cache interface
-│       │   └── date_resolver.py    # Deterministic relative-date timezone resolution
-│       ├── config.py       # pydantic-settings configuration
-│       └── main.py         # FastAPI application factory & error handlers
-├── data/
-│   └── documents/          # Meteorological reference documents for RAG
-├── tests/                  # Pytest test suite (65+ tests covering schemas, API, verifier, dates)
-├── docs/
-│   └── DATA_SOURCES.md     # Open-Meteo API specifications, limits & license terms
-├── .env.example            # Environment configuration template
-├── requirements.txt        # Python backend dependencies
-└── README.md               # Project documentation
+                                  ┌────────────────────────┐
+                                  │      Client (PWA)      │
+                                  │ React 18 + Vite + TS   │
+                                  └───────────┬────────────┘
+                                              │ HTTP / SSE Stream
+                                              ▼
+                                  ┌────────────────────────┐
+                                  │    FastAPI Gateway     │
+                                  │ Security, Rate Limiter │
+                                  └─────┬────────────┬─────┘
+                                        │            │
+                  ┌─────────────────────┘            └────────────────────┐
+                  ▼                                                       ▼
+       ┌──────────────────────┐                               ┌──────────────────────┐
+       │   Meteorological     │                               │ Grounded RAG & LLM   │
+       │   Data Ingestion     │                               │ Orchestration        │
+       └──────────┬───────────┘                               └──────────┬───────────┘
+                  │                                                      │
+         ┌────────┴────────┐                                   ┌─────────┴─────────┐
+         │  Open-Meteo API │                                   │ ChromaDB (Vectors)│
+         │  ECMWF, GFS,    │                                   │ 18 Peer-Reviewed  │
+         │  ERA5 Reanalysis│                                   │ Atmospheric Docs  │
+         └─────────────────┘                                   └─────────┬─────────┘
+                                                                         │
+                                                               ┌─────────┴─────────┐
+                                                               │ Number Verifier & │
+                                                               │ Hallucination Bed │
+                                                               └─────────┬─────────┘
+                                                                         │
+                                                               ┌─────────┴─────────┐
+                                                               │ OpenRouter Engine │
+                                                               │ Gemini 2.5 Flash  │
+                                                               └───────────────────┘
 ```
 
----
-
-## Architecture & Implementation
-
-### Phase 1: Foundations & Schemas
-* **Strict Base Metadata**: Every model enforces `units`, `provider`, `retrieved_at`, `coordinates`, and `timezone`.
-* **Domain Models**: `Location`, `WeatherSnapshot`, `ForecastPoint`, `HistoricalRecord` (`observation`, `reanalysis`, `forecast`), `AirQuality`, `ChatRequest`, `ChatResponse`, `SourceRef`, `ErrorResponse`.
-* **Caching Interface**: Thread-safe `InMemoryTTLCache` behind abstract `Cache` ABC.
-* **Error Format**: Uniform `ErrorResponse` model for all exceptions.
-
-### Phase 2: Real Data Services & REST Endpoints
-* **Async Open-Meteo Client**: Built on `httpx.AsyncClient` with exponential backoff on transient/5xx errors (up to 2 retries). 4xx client errors fail immediately.
-* **Decoupled Normalizers**: Separates raw provider JSON parsing from internal domain schemas (`provider JSON -> normalizer -> Pydantic model`).
-* **TTL Caching**: Forecasts (15 min), current conditions (10 min), air quality (15 min), historical records and geocoding (24 hours).
-* **Endpoints**:
-  * `GET /api/locations/search?q={query}&count={count}`
-  * `GET /api/weather/current?latitude={lat}&longitude={lon}&units={celsius|fahrenheit}`
-  * `GET /api/weather/forecast?latitude={lat}&longitude={lon}&days={days}&units={celsius|fahrenheit}`
-  * `GET /api/weather/history?latitude={lat}&longitude={lon}&start={start}&end={end}&units={celsius|fahrenheit}`
-  * `GET /api/air-quality?latitude={lat}&longitude={lon}`
-* **India Meteorological Department (IMD) Alerts**: Explicit, static advisory for India locations: `"Official alerts: check IMD (https://mausam.imd.gov.in/)"`.
-
-### Phase 3: Grounded Conversational AI & Tool Calling
-* **LLM Tool Calling**: Strict JSON function declarations (`get_current`, `get_forecast`, `get_history`, `get_air_quality`) using function calling rather than hand-written intent classifiers.
-* **Deterministic Relative-Date Resolution**: Deterministically resolves expressions like `"today"`, `"tomorrow"`, `"day after tomorrow"`, `"this weekend"`, and `"yesterday"` in the **target location's timezone** before calling tools.
-* **Number Verifier**: After model generation, extracts all numbers from the response and verifies them against the payload (allowing rounding and unit conversions).
-  * **On mismatch**: Regenerates once with the detected mismatches explicitly listed.
-  * **On secondary mismatch**: Automatically falls back to a deterministic, fact-accurate template built from the verified payload.
-* **Chat Contract (`POST /api/chat`)**: Returns `answer`, `intent`, `location`, `valid_period`, `weather_data`, `sources`, `limitations`.
-### Phase 4: Explanatory Meteorological Knowledge Corpus & RAG
-* **Explanatory Knowledgebase**: 18 peer-reviewed/authoritative meteorological reference documents in `data/documents/` covering physical dynamics, scales, atmospheric thermodynamics, and Indian synoptic phenomena (monsoons, cyclones, western disturbances).
-* **ChromaDB Vector Store**: Chunked to 500–800 tokens with 50–100 token overlap; cosine similarity threshold filtering (default: 0.45).
-* **Prompt Injection Defense**: Retrieved document text is containerized within `<untrusted_retrieved_knowledge>` XML delimiters with explicit anti-injection instructions.
-* **Separation of Citations**: Live weather API providers (`sources`) are reported separately from document citations (`knowledge_citations`).
-
-### Phase 5: Combined Weather + RAG, Multilingual & Performance Optimization
-* **Mixed-Intent Tool Orchestration**: Multi-tool execution for complex queries (e.g. `"Why does it feel hotter than the temperature today in Ahmedabad?"` -> `get_current` + `search_knowledge`).
-* **Minimum Tool Routing**: Dual-tier routing strategy using fast, cost-efficient router LLMs for entity/tool extraction and high-capacity models for grounded synthesis.
-* **Streaming Responses (SSE)**: Server-Sent Events endpoint at `POST /api/chat/stream` delivering low time-to-first-token streaming.
-* **Multilingual Grounding (English, Hindi, Gujarati)**: Full support for English, Hindi (हिंदी), and Gujarati (ગુજરાતી), with Indic numeral normalizer (Devanagari `०-९` and Gujarati `૦-૯` mapped to ASCII) so the number verifier rigorously validates translated outputs.
-* **Latency Instrumentation & Resilience**: Stage-by-stage latency tracking (`routing`, `tools_execution`, `explanation_generation`, `verification`), per-request timeout protection, client IP sliding-window rate limiting (30 req/min), and 8 KB payload caps.
+* **Anti-Hallucination Number Verifier**: Every numerical fact in the LLM response is checked against raw meteorological API payloads. Mismatches trigger automatic self-correction or deterministic fallback.
+* **Deterministic Relative Dates**: Natural phrases like *"this weekend"*, *"day after tomorrow"*, or *"कल"* are resolved deterministically in the target city's timezone.
+* **Multilingual Grounding**: Full support for English, Hindi (हिंदी), and Gujarati (ગુજરાતી), with Indic numeral normalizer (mapping `०-९` and `૦-૯` to ASCII for mathematical verification).
 
 ---
 
-## Data Sources & Licensing
+## 🚀 Quickstart
 
-> [!WARNING]
-> The free Open-Meteo API tier is restricted to **NON-COMMERCIAL use only** (personal experiments, prototyping, academic research). A paid subscription plan or an alternative provider is strictly required before any commercial launch.
->
-> All data requires visible attribution:
-> `Weather data by Open-Meteo.com (CC BY 4.0)`
-
-For complete details on endpoints, variables, rate limits, and licensing, refer to [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md).
-
----
-
-## Quickstart
-
-### 1. Setup Virtual Environment
+### 1. Clone & Setup Virtual Environment
 ```bash
+git clone https://github.com/prachizala/Wheather-Gpt.git
+cd Wheather-Gpt
+
+# Create Python environment
 python -m venv .venv
-# On Windows
-.\.venv\Scripts\activate
-# On Linux/macOS
-source .venv/bin/activate
+.\.venv\Scripts\activate       # Windows
+source .venv/bin/activate      # Linux / macOS
 
 pip install -r requirements.txt
 ```
 
-### 2. Configure Environment
+### 2. Configure Environment (`.env`)
 ```bash
 cp .env.example .env
 ```
-*(Configure `OPENROUTER_API_KEY` for live OpenRouter tool calling with `LLM_MODEL_MAIN` and `LLM_MODEL_FAST`; if unset, the hermetic mock LLM provider operates automatically.)*
-
-Key environment variables:
-- `OPENROUTER_API_KEY`: OpenRouter bearer authentication token.
-- `LLM_MODEL_MAIN`: Model slug for final synthesis (default: `google/gemini-2.5-flash`).
-- `LLM_MODEL_FAST`: Fast model slug for routing and tool extraction (default: `google/gemini-2.5-flash-lite`).
-- `LLM_MODEL_FALLBACK`: Optional fallback model slug used if main model experiences a 5xx error.
-- `OPENROUTER_BASE_URL`: Base endpoint (default: `https://openrouter.ai/api/v1`).
-- `APP_URL` / `APP_TITLE`: Optional attribution headers sent to OpenRouter.
-
-### 3. Run Tests
-```bash
-# Run all unit tests hermetically (no external API calls)
-pytest -v
-
-# Run optional live integration smoke test
-RUN_LIVE_TESTS=1 pytest -v -m live
+Add your OpenRouter key:
+```ini
+OPENROUTER_API_KEY=your_openrouter_api_key_here
+LLM_MODEL_MAIN=google/gemini-2.5-flash
+LLM_MODEL_FAST=google/gemini-2.5-flash-lite
 ```
 
-### 4. Start the Backend API
+### 3. Start Backend & Frontend
 ```bash
+# Terminal 1: Backend
 uvicorn backend.app.main:app --reload --port 8000
+
+# Terminal 2: Frontend
+cd frontend
+npm install
+npm run dev
 ```
-- Interactive Swagger UI: `http://localhost:8000/docs`
-- OpenAPI Schema: `http://localhost:8000/openapi.json`
-- Health check: `http://localhost:8000/api/health`
+Visit `http://localhost:5173` in your browser.
+
+---
+
+## 🐳 Docker & Cloud Deployment
+
+### 1-Click Free Deployment on Render.com
+1. Go to [Render.com](https://render.com) → **New Web Service**.
+2. Connect `https://github.com/prachizala/Wheather-Gpt.git`.
+3. Select **Docker** environment and **Free Plan**.
+4. Add environment variable: `OPENROUTER_API_KEY`.
+5. Hit **Create Web Service**! Render will automatically deploy a unified production URL.
+
+### Single-Command Docker Deployment
+```bash
+docker compose up --build -d
+```
+* Web App: `http://localhost` (Port 80)
+* REST API: `http://localhost:8000` (Port 8000)
+
+---
+
+## 🧪 Automated E2E Testing
+
+WeatherGPT includes a comprehensive Playwright End-to-End test suite ensuring visual layout integrity, responsive behavior, accessibility, and chart stability:
+
+```bash
+# Run all Playwright E2E UI tests
+pytest tests/e2e/test_ui_playwright.py -v
+```
+
+```text
+============================= test session starts =============================
+tests/e2e/test_ui_playwright.py::test_ui_demo_flow PASSED                [ 16%]
+tests/e2e/test_ui_playwright.py::test_ui_error_state_handling PASSED     [ 33%]
+tests/e2e/test_ui_playwright.py::test_ui_keyboard_navigation_and_accessibility PASSED [ 50%]
+tests/e2e/test_ui_playwright.py::test_ui_chat_panel_interaction_and_layout PASSED [ 66%]
+tests/e2e/test_ui_playwright.py::test_ui_visual_integrity_and_diagnostics PASSED [ 83%]
+tests/e2e/test_ui_city_search_dropdown_no_overlap PASSED                [100%]
+
+============================= 6 passed in 34.43s ==============================
+```
+
+---
+
+## 📄 License & Attribution
+- Weather Data: Provided by [Open-Meteo.com](https://open-meteo.com/) under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (Educational & Non-Commercial use).
+- Official India Weather Warnings: Refer to [India Meteorological Department (IMD)](https://mausam.imd.gov.in/).
+- Built with ❤️ by [Prachi Zala](https://github.com/prachizala).
