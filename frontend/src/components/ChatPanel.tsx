@@ -53,6 +53,18 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({ selectedLocation, units })
     }
   }, [messages, isSubmitting]);
 
+  // Listen for quick-ask questions triggered from other cards
+  useEffect(() => {
+    const handleAskAi = (e: Event) => {
+      const customEvent = e as CustomEvent<{ prompt?: string }>;
+      if (customEvent.detail?.prompt) {
+        handleSend(customEvent.detail.prompt);
+      }
+    };
+    window.addEventListener('weathergpt:ask-ai', handleAskAi);
+    return () => window.removeEventListener('weathergpt:ask-ai', handleAskAi);
+  }, []);
+
   const handleSend = async (questionText?: string) => {
     const textToSend = (questionText || input).trim();
     if (!textToSend || isSubmitting) return;

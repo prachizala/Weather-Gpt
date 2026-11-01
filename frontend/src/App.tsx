@@ -11,6 +11,7 @@ import { EventWeatherShieldCard } from './components/EventWeatherShieldCard';
 import { VoiceBriefingCard } from './components/VoiceBriefingCard';
 import { WeatherAnomalyCard } from './components/WeatherAnomalyCard';
 import { WindStreamlineCard } from './components/WindStreamlineCard';
+import { BiometeorologyCard } from './components/BiometeorologyCard';
 import { ChatPanel } from './components/ChatPanel';
 import { AdvisoriesBanner } from './components/AdvisoriesBanner';
 import { HistoricalComparisonCard } from './components/HistoricalComparisonCard';
@@ -308,6 +309,9 @@ export const App: React.FC = () => {
                 airQuality={airQuality}
                 units={units}
                 isLoading={isLoading}
+                onAskChat={(question) => {
+                  window.dispatchEvent(new CustomEvent('weathergpt:ask-ai', { detail: { prompt: question } }));
+                }}
               />
 
               <WindStreamlineCard
@@ -315,6 +319,15 @@ export const App: React.FC = () => {
                 weather={weather}
                 units={units}
                 isLoading={isLoading}
+              />
+
+              <BiometeorologyCard
+                current={weather}
+                airQuality={airQuality}
+                cityName={selectedLocation.name}
+                onAskAI={(prompt) => {
+                  window.dispatchEvent(new CustomEvent('weathergpt:ask-ai', { detail: { prompt } }));
+                }}
               />
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
