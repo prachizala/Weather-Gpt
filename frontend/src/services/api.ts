@@ -8,7 +8,7 @@ import {
   HistoricalComparisonResult,
 } from '../types/api';
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8001';
 
 export class WeatherApiClient {
   private baseUrl: string;

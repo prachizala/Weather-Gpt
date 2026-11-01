@@ -6,6 +6,7 @@ import { CurrentConditionsCard } from './components/CurrentConditionsCard';
 import { ForecastCards } from './components/ForecastCards';
 import { WeatherCharts } from './components/WeatherCharts';
 import { AirQualityCard } from './components/AirQualityCard';
+import { LifestyleIntelligenceCard } from './components/LifestyleIntelligenceCard';
 import { ChatPanel } from './components/ChatPanel';
 import { AdvisoriesBanner } from './components/AdvisoriesBanner';
 import { HistoricalComparisonCard } from './components/HistoricalComparisonCard';
@@ -261,13 +262,21 @@ export const App: React.FC = () => {
               gap: 24,
             }}
           >
-            {/* LEFT: Current conditions, AQI, Forecast, Charts */}
+            {/* LEFT: Current conditions, Lifestyle intelligence, AQI, Forecast, Charts */}
             <section style={{ display: 'flex', flexDirection: 'column', gap: 20, minWidth: 0 }}>
               <CurrentConditionsCard
                 location={selectedLocation}
                 weather={weather}
                 units={units}
                 onToggleUnits={toggleUnits}
+                isLoading={isLoading}
+              />
+
+              <LifestyleIntelligenceCard
+                weather={weather}
+                forecast={forecast}
+                airQuality={airQuality}
+                units={units}
                 isLoading={isLoading}
               />
 
