@@ -15,6 +15,7 @@ import { BiometeorologyCard } from './components/BiometeorologyCard';
 import { PrecipitationNowcastCard } from './components/PrecipitationNowcastCard';
 import { EnergyWeatherCard } from './components/EnergyWeatherCard';
 import { PwaInstallBanner } from './components/PwaInstallBanner';
+import { WeatherStoryShareModal } from './components/WeatherStoryShareModal';
 import { ChatPanel } from './components/ChatPanel';
 import { AdvisoriesBanner } from './components/AdvisoriesBanner';
 import { HistoricalComparisonCard } from './components/HistoricalComparisonCard';
@@ -46,6 +47,7 @@ export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isOffline, setIsOffline] = useState<boolean>(!navigator.onLine);
+  const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleOnline = () => setIsOffline(false);
@@ -177,9 +179,29 @@ export const App: React.FC = () => {
               />
             </div>
 
-            {/* Right section: PWA Install & Units toggle */}
+            {/* Right section: PWA Install, Social Share & Units toggle */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <PwaInstallBanner />
+              <button
+                onClick={() => setIsShareModalOpen(true)}
+                title="Create and share Instagram or WhatsApp weather story"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '7px 12px',
+                  borderRadius: '8px',
+                  backgroundColor: 'rgba(251, 191, 36, 0.12)',
+                  border: '1px solid rgba(251, 191, 36, 0.35)',
+                  color: 'var(--accent)',
+                  fontWeight: '700',
+                  fontSize: '12px',
+                  transition: 'all 0.2s',
+                  cursor: 'pointer',
+                }}
+              >
+                <span>📸 Story</span>
+              </button>
               <button
                 onClick={toggleUnits}
                 aria-label={`Switch to ${units === 'celsius' ? 'Fahrenheit' : 'Celsius'}`}
@@ -422,6 +444,17 @@ export const App: React.FC = () => {
           </footer>
         </div>
       </div>
+
+      {/* Weather Story Share Modal */}
+      <WeatherStoryShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        location={selectedLocation}
+        weather={weather}
+        airQuality={airQuality}
+        forecast={forecast}
+        units={units}
+      />
 
       {/* ─── RESPONSIVE STYLES ───────────────────────────────────────── */}
       <style>{`
