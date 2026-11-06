@@ -15,6 +15,7 @@ import { BiometeorologyCard } from './components/BiometeorologyCard';
 import { PrecipitationNowcastCard } from './components/PrecipitationNowcastCard';
 import { EnergyWeatherCard } from './components/EnergyWeatherCard';
 import { RouteWeatherCorridorCard } from './components/RouteWeatherCorridorCard';
+import { AmbientSoundscapeCard } from './components/AmbientSoundscapeCard';
 import { PwaInstallBanner } from './components/PwaInstallBanner';
 import { WeatherStoryShareModal } from './components/WeatherStoryShareModal';
 import { ChatPanel } from './components/ChatPanel';
@@ -388,6 +389,12 @@ export const App: React.FC = () => {
                 onAskAI={(prompt) => {
                   window.dispatchEvent(new CustomEvent('weathergpt:ask-ai', { detail: { prompt } }));
                 }}
+              />
+
+              <AmbientSoundscapeCard
+                location={selectedLocation}
+                weather={weather}
+                isLoading={isLoading}
               />
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
