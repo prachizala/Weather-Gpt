@@ -14,6 +14,7 @@ import { WindStreamlineCard } from './components/WindStreamlineCard';
 import { BiometeorologyCard } from './components/BiometeorologyCard';
 import { PrecipitationNowcastCard } from './components/PrecipitationNowcastCard';
 import { EnergyWeatherCard } from './components/EnergyWeatherCard';
+import { RouteWeatherCorridorCard } from './components/RouteWeatherCorridorCard';
 import { PwaInstallBanner } from './components/PwaInstallBanner';
 import { WeatherStoryShareModal } from './components/WeatherStoryShareModal';
 import { ChatPanel } from './components/ChatPanel';
@@ -371,6 +372,17 @@ export const App: React.FC = () => {
                 location={selectedLocation}
                 weather={weather}
                 airQuality={airQuality}
+                units={units}
+                isLoading={isLoading}
+                onAskAI={(prompt) => {
+                  window.dispatchEvent(new CustomEvent('weathergpt:ask-ai', { detail: { prompt } }));
+                }}
+              />
+
+              <RouteWeatherCorridorCard
+                location={selectedLocation}
+                weather={weather}
+                forecast={forecast}
                 units={units}
                 isLoading={isLoading}
                 onAskAI={(prompt) => {
