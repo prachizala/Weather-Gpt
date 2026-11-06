@@ -26,6 +26,29 @@ export const AmbientSoundscapeCard: React.FC<AmbientSoundscapeCardProps> = ({
   const noiseSourceRef = useRef<AudioBufferSourceNode | null>(null);
   const lfoRef = useRef<OscillatorNode | null>(null);
 
+  // Always run cleanup effect unconditionally at top-level to satisfy Rules of Hooks
+  useEffect(() => {
+    return () => {
+      try {
+        if (noiseSourceRef.current) {
+          noiseSourceRef.current.stop();
+          noiseSourceRef.current.disconnect();
+          noiseSourceRef.current = null;
+        }
+        if (lfoRef.current) {
+          lfoRef.current.stop();
+          lfoRef.current.disconnect();
+          lfoRef.current = null;
+        }
+      } catch (e) {
+        // Ignored
+      }
+      if (audioCtxRef.current) {
+        audioCtxRef.current.close().catch(() => {});
+      }
+    };
+  }, []);
+
   if (isLoading || !weather) return null;
 
   const cityName = location?.name ?? 'your city';
@@ -183,15 +206,7 @@ export const AmbientSoundscapeCard: React.FC<AmbientSoundscapeCardProps> = ({
     }
   };
 
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      stopAudioNodes();
-      if (audioCtxRef.current) {
-        audioCtxRef.current.close();
-      }
-    };
-  }, []);
+
 
   return (
     <section
