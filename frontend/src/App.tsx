@@ -17,6 +17,7 @@ import { EnergyWeatherCard } from './components/EnergyWeatherCard';
 import { RouteWeatherCorridorCard } from './components/RouteWeatherCorridorCard';
 import { AmbientSoundscapeCard } from './components/AmbientSoundscapeCard';
 import { CelestialSkyRadarCard } from './components/CelestialSkyRadarCard';
+import { AgroClimateShieldCard } from './components/AgroClimateShieldCard';
 import { PwaInstallBanner } from './components/PwaInstallBanner';
 import { WeatherStoryShareModal } from './components/WeatherStoryShareModal';
 import { ChatPanel } from './components/ChatPanel';
@@ -401,6 +402,13 @@ export const App: React.FC = () => {
               <CelestialSkyRadarCard
                 location={selectedLocation}
                 weather={weather}
+                isLoading={isLoading}
+              />
+
+              <AgroClimateShieldCard
+                location={selectedLocation}
+                weather={weather}
+                forecast={forecast}
                 isLoading={isLoading}
               />
 
