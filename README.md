@@ -3,6 +3,7 @@
 # 🌤️ WeatherGPT
 ### Next-Generation Agentic AI Meteorological Intelligence & Decision Radars
 
+[![CI Pipeline](https://github.com/prachizala/Weather-Gpt/actions/workflows/ci.yml/badge.svg)](https://github.com/prachizala/Weather-Gpt/actions/workflows/ci.yml)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![React Vite](https://img.shields.io/badge/React_Vite-18+-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
