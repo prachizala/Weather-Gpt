@@ -16,6 +16,7 @@ import { PrecipitationNowcastCard } from './components/PrecipitationNowcastCard'
 import { EnergyWeatherCard } from './components/EnergyWeatherCard';
 import { RouteWeatherCorridorCard } from './components/RouteWeatherCorridorCard';
 import { AmbientSoundscapeCard } from './components/AmbientSoundscapeCard';
+import { CelestialSkyRadarCard } from './components/CelestialSkyRadarCard';
 import { PwaInstallBanner } from './components/PwaInstallBanner';
 import { WeatherStoryShareModal } from './components/WeatherStoryShareModal';
 import { ChatPanel } from './components/ChatPanel';
@@ -392,6 +393,12 @@ export const App: React.FC = () => {
               />
 
               <AmbientSoundscapeCard
+                location={selectedLocation}
+                weather={weather}
+                isLoading={isLoading}
+              />
+
+              <CelestialSkyRadarCard
                 location={selectedLocation}
                 weather={weather}
                 isLoading={isLoading}
