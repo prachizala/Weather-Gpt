@@ -86,6 +86,28 @@ Unlike traditional weather apps (Apple Weather, AccuWeather, Windy) that simply 
 * Client-side HTML5 Canvas PNG rendering with zero external library dependencies.
 * Native OS mobile Web Share API integration.
 
+### 11. 🛣️ Highway Route & Travel Micro-Climate Corridor (`RouteWeatherCorridorCard`)
+* Multi-waypoint micro-climate progression across popular Indian travel corridors (Ahmedabad ➔ Mumbai, Delhi ➔ Jaipur, Mumbai ➔ Pune, Bengaluru ➔ Mysuru).
+* Waypoint temperature variations, cloud transitions, and crosswind gusts.
+* Critical driver road safety hazards: Road wet-friction coefficient, low visibility fog points, and low-angle sun glare hazard time slots.
+
+### 12. 🎧 Atmospheric Procedural Web Audio Soundscape (`AmbientSoundscapeCard`)
+* Native Web Audio API generative synthesizer converting real-time meteorological variables into live procedural acoustics.
+* Synthesizes continuous pink noise buffers, aerodynamic lowpass/bandpass wind filter modulations (synced to live km/h), rain droplet resonant frequencies, and soothing 108 Hz night grounding drones.
+* Zero external audio files or network stream downloads; 100% synthesized in the browser with presets (`Live Weather Sync`, `Gentle Rain Drops`, `Aerodynamic Breeze`, `Deep Night Calm`, `Study & Sleep Focus`).
+
+### 13. 🔭 Celestial & Stargazing Clarity Radar (`CelestialSkyRadarCard`)
+* **Astronomical Seeing Index (0–100%)**: Computes sky transparency from cloud cover, relative humidity dew point, and wind shear.
+* **Exact Moon Phase & Synodic Lunar Illumination**: Mathematical algorithm calculating current moon phase, illumination percentage, and lunar age.
+* **Planetary & Deep-Sky Targets**: Real-time visibility windows for Jupiter, Saturn, Mars, and open star clusters (Pleiades M45).
+* **Photography Hours**: Precise calculations for Evening Golden Hour, Dusk Blue Hour, and Astronomical True Night (< -18° solar angle).
+
+### 14. 🌾 Agro-Climate & Smart Irrigation Shield (`AgroClimateShieldCard`)
+* **Evapotranspiration ($ET_0$) Estimator**: Hargreaves-Samani model estimating daily soil moisture loss (mm/day) from temperature, humidity, wind, and solar radiation proxy.
+* **Smart Irrigation Advisory**: Recommends exact watering cycles or advises skipping watering when upcoming precipitation is forecasted to save 100% irrigation water.
+* **Optimal Spraying Window**: Real-time assessment of wind drift hazard, rain wash-off probability, and high-temperature foliar vaporization risk.
+* **Crop Disease & Fungal Blight Risk**: Smith Period incubation warnings for powdery mildew, downy mildew, and leaf spots.
+
 ---
 
 ## 🏗️ Architecture & Grounded RAG Pipeline
