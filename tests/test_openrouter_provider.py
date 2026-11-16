@@ -18,7 +18,7 @@ from backend.app.services.tools import WEATHER_TOOLS
 @pytest.fixture
 def mock_openrouter_provider():
     return OpenRouterProvider(
-        api_key="sk-or-test-mock-key-12345",
+        api_key="sk-or-v1-mock-test-key-00000000000000000000000000000000",
         model_main="google/gemini-2.5-flash",
         model_fast="google/gemini-2.5-flash-lite",
         model_fallback="anthropic/claude-3-haiku",
@@ -69,7 +69,7 @@ async def test_tool_call_round_trip(mock_openrouter_provider):
 
     async def mock_handler(request: httpx.Request):
         assert request.url.path == "/api/v1/chat/completions"
-        assert request.headers["authorization"] == "Bearer sk-or-test-mock-key-12345"
+        assert request.headers["authorization"] == "Bearer sk-or-v1-mock-test-key-00000000000000000000000000000000"
         assert request.headers["http-referer"] == "https://weathergpt.example.com"
         assert request.headers["x-title"] == "WeatherGPT Test"
         body = json.loads(request.content)
@@ -159,7 +159,7 @@ async def test_401_invalid_api_key(mock_openrouter_provider):
             )
         assert "LLM key invalid" in str(exc_info.value)
         # Ensure key is not exposed in error string
-        assert "sk-or-test-mock-key-12345" not in str(exc_info.value)
+        assert "sk-or-v1-mock-test-key-00000000000000000000000000000000" not in str(exc_info.value)
 
 
 @pytest.mark.asyncio
@@ -258,7 +258,7 @@ async def test_5xx_without_fallback_fails(mock_openrouter_provider):
 @pytest.mark.asyncio
 async def test_startup_check_missing_model_slug():
     provider = OpenRouterProvider(
-        api_key="sk-or-valid-key",
+        api_key="sk-or-v1-mock-test-key-00000000000000000000000000000000",
         model_main="nonexistent/model-slug-xyz",
         model_fast="google/gemini-2.5-flash-lite",
         base_url="https://openrouter.ai/api/v1",
@@ -286,7 +286,7 @@ async def test_startup_check_missing_model_slug():
 @pytest.mark.asyncio
 async def test_startup_check_model_without_tool_support():
     provider = OpenRouterProvider(
-        api_key="sk-or-valid-key",
+        api_key="sk-or-v1-mock-test-key-00000000000000000000000000000000",
         model_main="google/gemini-2.5-flash",
         model_fast="unsupported/model-no-tools",
         base_url="https://openrouter.ai/api/v1",
@@ -313,7 +313,7 @@ async def test_startup_check_model_without_tool_support():
 @pytest.mark.asyncio
 async def test_startup_check_success():
     provider = OpenRouterProvider(
-        api_key="sk-or-valid-key",
+        api_key="sk-or-v1-mock-test-key-00000000000000000000000000000000",
         model_main="google/gemini-2.5-flash",
         model_fast="google/gemini-2.5-flash-lite",
         base_url="https://openrouter.ai/api/v1",

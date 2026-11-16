@@ -32,4 +32,8 @@ frontend/node_modules/
 frontend/dist/
 .chroma/
 data/chroma_db/
+*.db
+*.sqlite
+*.sqlite3
+backend/weather.sqlite3
 *.log
