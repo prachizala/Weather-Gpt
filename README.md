@@ -239,4 +239,4 @@ tests/e2e/test_ui_city_search_dropdown_no_overlap PASSED                [100%]
 ## 📄 License & Attribution
 - Weather Data: Provided by [Open-Meteo.com](https://open-meteo.com/) under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (Educational & Non-Commercial use).
 - Official India Weather Warnings: Refer to [India Meteorological Department (IMD)](https://mausam.imd.gov.in/).
-- Built with ❤️ by [Prachi Zala](https://github.com/prachizala).
+- Built by [Prachi Zala](https://github.com/prachizala).
